@@ -20,18 +20,18 @@
     }
     function doKeyDown(e) {
 
-        if (e.keyCode==87&&leftBat.y>=0) {
+        if (e.keyCode == 81 && leftBat.y>=0) {
             leftBat.moveUp();
                              
         }
-        if (e.keyCode == 83 && leftBat.y <= ctx.canvas.height - batHeight) {
+        if (e.keyCode == 65 && leftBat.y <= ctx.canvas.height - batHeight) {
             leftBat.moveDown();
            
         }
-        if (e.keyCode == 38 && rightBat.y >= 0) {
+        if (e.keyCode == 80 && rightBat.y >= 0) {
             rightBat.moveUp();
         }
-        if (e.keyCode==40&&rightBat.y <= ctx.canvas.height - batHeight) {
+        if (e.keyCode == 76 && rightBat.y <= ctx.canvas.height - batHeight) {
             rightBat.moveDown();
         }
       
