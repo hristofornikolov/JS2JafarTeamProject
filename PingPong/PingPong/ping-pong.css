@@ -60,6 +60,7 @@ nav input {
 
 #dynamic-canvas {
     z-index: 2; /*Topmost layer*/
+    /*margin: 12px 0;*/
 }
 
 #static-canvas {
