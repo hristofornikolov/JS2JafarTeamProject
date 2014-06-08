@@ -6,9 +6,9 @@
 
 #side-box {
     background-color: green;
-    float: right;
-    height: 100%;
-    width: 200px;
+    /*float: right;*/
+    height: 100px;
+    width: 100%;
 }
 
 #game-container {
