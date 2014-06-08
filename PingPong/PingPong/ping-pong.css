@@ -7,12 +7,12 @@
 #side-box {
     background-color: lightblue;
     /*float: right;*/
-    height: 100px;
+    height: 110px;
     width: 100%;
 }
 
 #side-box input {
-    margin: 25px;
+    margin: 10px 25px;
     
     width: 225px;
     height: 50px;
@@ -24,6 +24,21 @@
     border: 5px solid white;
     border-radius: 10px;
     background-color: dimgray;
+}
+
+#left-player {
+    float: left;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: Consolas;
+}
+
+#right-player {
+    float: right;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: Consolas;
+    text-align: right;
 }
 
 #game-container {
