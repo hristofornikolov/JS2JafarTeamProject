@@ -27,6 +27,10 @@ nav input {
     background-color: dimgray;
 }
 
+.center {
+    text-align: center;
+}
+
 #left-player {
     float: left;
     font-size: 18px;
