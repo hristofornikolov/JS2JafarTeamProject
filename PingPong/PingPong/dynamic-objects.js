@@ -5,10 +5,18 @@
     var batHeight = 100;
     var batWidth = 15;
     var ballRadius = 10;
+    var ballSpeed = 1;
+    
     var direction = {
         x: 'right',
         y: 'down'
 
+    }
+    var directions = {
+        "left": -1,
+        "right": 1,
+        "up":-1,
+         "down":+1
     }
     function doKeyDown(e) {
 
@@ -40,7 +48,24 @@
             ctx.arc(this.x, this.y, ballRadius, 0, 2 * Math.PI);
             ctx.fill();
             ctx.stroke();
-
+        }
+        this.move = function () {
+            this.x += ballSpeed * directions[direction.x];
+            this.y += ballSpeed * directions[direction.y];
+        }
+        this.bounce = function () {
+            if (this.x - ballRadius < 0+batWidth) {
+               direction.x = "right";
+            }
+            if (this.x + ballRadius > ctx.canvas.width - batWidth) {
+                direction.x = "left";
+            }
+            if (this.y - ballRadius < 0) {
+               direction.y = "down";
+            }
+            if (this.y + ballRadius > ctx.canvas.height) {
+                direction.y = "up";
+            }
         }
     }
     function drawBat(x, y) {
@@ -70,13 +95,15 @@
    
     var rightBat = new drawBat(600-batWidth, 100);
     rightBat.draw(ctx);
-    var ball = new drawBall(150, 150, 10);
+    var ball = new drawBall(500, 100, 10);
     ball.draw(ctx);
     function animation() {
         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
         leftBat.draw(ctx);
         rightBat.draw(ctx);
         ball.draw(ctx);
+        ball.move();
+        ball.bounce();
         requestAnimationFrame(animation);
        
     }
