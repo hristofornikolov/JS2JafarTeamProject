@@ -63,6 +63,11 @@
     <Content Include="ping-pong.css" />
     <Content Include="ping-pong.html" />
     <Content Include="static-objects.js" />
+    <Content Include="ping-pong.html" />
+    <Content Include="pingpong.css" />
+    <Content Include="pingpong.html" />
+    <Content Include="static-objects.js" />
+    <Content Include="staticObjects.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

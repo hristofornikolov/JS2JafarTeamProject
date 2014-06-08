@@ -54,10 +54,10 @@
             this.y += ballSpeed * directions[direction.y];
         }
         this.bounce = function () {
-            if (this.x - ballRadius < 0+batWidth) {
+            if ((this.y > leftBat.y && this.y < leftBat.y + batHeight) && this.x - ballRadius === batWidth) {
                direction.x = "right";
             }
-            if (this.x + ballRadius > ctx.canvas.width - batWidth) {
+            if ((this.y > rightBat.y && this.y < rightBat.y + batHeight) && this.x + ballRadius === ctx.canvas.width-batWidth) {
                 direction.x = "left";
             }
             if (this.y - ballRadius < 0) {
@@ -95,7 +95,7 @@
    
     var rightBat = new drawBat(600-batWidth, 100);
     rightBat.draw(ctx);
-    var ball = new drawBall(500, 100, 10);
+    var ball = new drawBall(500, 150, 10);
     ball.draw(ctx);
     function animation() {
         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
