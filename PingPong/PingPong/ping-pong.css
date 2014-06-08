@@ -5,10 +5,25 @@
 }
 
 #side-box {
-    background-color: green;
-    float: right;
-    height: 100%;
+    background-color: lightblue;
+    /*float: right;*/
+    height: 100px;
+    width: 100%;
+}
+
+#side-box input {
+    margin: 25px;
+    
     width: 200px;
+    height: 50px;
+    text-align: center;
+    color: white;
+    font-family: Consolas;
+    font-size: 24px;
+    font-weight: bold;
+    border: 5px solid white;
+    border-radius: 10px;
+    background-color: dimgray;
 }
 
 #game-container {
