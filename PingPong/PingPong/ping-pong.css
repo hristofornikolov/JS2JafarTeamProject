@@ -5,14 +5,14 @@
   background-color: lightblue;
 }
 
-#side-box {
-    background-color: lightblue;
+nav {
+    /*background-color: lightblue;*/
     /*float: right;*/
     height: 110px;
     width: 100%;
 }
 
-#side-box input {
+nav input {
     margin: 10px 25px;
     
     width: 225px;
