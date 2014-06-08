@@ -17,6 +17,16 @@
     ctx.lineTo(300, 400);
     ctx.stroke();
     
+    var leftPlayerScore = '0';
+    var rightPlayerScore = '0';
+
+    ctx.font = "60px Consolas";
+
+    ctx.fillText(leftPlayerScore, 248,50);
+    ctx.fillText(rightPlayerScore, 320, 50);
+    
+
+
 
 
 }
