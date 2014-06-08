@@ -57,11 +57,12 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="dynamic-objects.js" />
     <Content Include="html5reset-1.6.1.css" />
     <Content Include="initialise.js" />
-    <Content Include="pingpong.css" />
-    <Content Include="pingpong.html" />
-    <Content Include="staticObjects.js" />
+    <Content Include="ping-pong.css" />
+    <Content Include="ping-pong.html" />
+    <Content Include="static-objects.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
