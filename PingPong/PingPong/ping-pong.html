@@ -7,11 +7,23 @@
 </head>
 <body>
     <div id="side-box">
-        <input type="button" value="Start game"/>
+        <input type="button" value="Start game" />
         <input type="button" value="Restart game" />
         <input type="button" value="End Game" />
-    </div>
 
+        <div>
+            <div id="left-player">
+                <p>&quot;W&quot; : move up</p>
+                <p>&quot;S&quot; : move down</p>
+            </div>
+
+            <div id="right-player">
+                <p>move up : &quot;W&quot;</p>
+                <p>move down : &quot;S&quot;</p>
+            </div>
+        </div>
+    </div>
+    
     <div id="game-container">
         <canvas id="dynamic-canvas" class="draw-container" width="600" height="400">Your browser doesn't support canvas!</canvas>
         <canvas id="static-canvas" class="draw-container" width="600" height="400">Your browser doesn't support canvas!</canvas>
