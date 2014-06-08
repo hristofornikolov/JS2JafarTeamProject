@@ -24,9 +24,5 @@
 
     ctx.fillText(leftPlayerScore, 248,50);
     ctx.fillText(rightPlayerScore, 320, 50);
-    
-
-
-
 
 }
