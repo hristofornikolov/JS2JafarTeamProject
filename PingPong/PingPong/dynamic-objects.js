@@ -4,7 +4,7 @@
     document.body.addEventListener("keydown", doKeyDown, true);
     var batHeight = 100;
     var batWidth = 15;
-    var ballRadius = 10;
+    var ballRadius = 8;
     var ballSpeed = 1;
     
     var direction = {
@@ -43,7 +43,7 @@
        
         this.draw = function (ctx) {
             ctx.beginPath();
-            ctx.fillStyle = 'red';
+            ctx.fillStyle = 'white';
             ctx.strokeStyle = 'black';
             ctx.arc(this.x, this.y, ballRadius, 0, 2 * Math.PI);
             ctx.fill();
@@ -73,10 +73,10 @@
         this.y = y;
         this.draw = function (ctx) {
             ctx.beginPath();
-            ctx.fillStyle = 'black';
-            
+            ctx.fillStyle = 'white';
+            ctx.strokeStyle = 'black';
             ctx.fillRect(this.x, this.y, batWidth, batHeight);
-            ctx.fill();
+            ctx.strokeRect(this.x, this.y, batWidth, batHeight);
             
         }
         this.moveUp = function () {
