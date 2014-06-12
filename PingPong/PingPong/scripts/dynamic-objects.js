@@ -2,11 +2,13 @@
     var canvas = document.getElementById('dynamic-canvas');
     var ctx = canvas.getContext('2d');
     document.body.addEventListener("keydown", doKeyDown, true);
-    var batHeight = 100;
-    var batWidth = 15;
-    var ballRadius = 8;
-    var ballSpeed = 1;
-    var isGameRunning = false;
+
+    var batHeight = 100,
+        batWidth = 15,
+        batCornerRadius =7,
+        ballRadius = 8,
+        ballSpeed = 1,
+        isGameRunning = false;
 
     var direction = {
         x: 'right',
@@ -79,12 +81,32 @@
         this.y = y;
 
         this.draw = function (ctx) {
+
+            //ctx.beginPath();
+            //ctx.fillStyle = 'white';
+            //ctx.strokeStyle = 'black';
+            //ctx.fillRect(this.x, this.y, batWidth, batHeight);
+            //ctx.strokeRect(this.x, this.y, batWidth, batHeight);
+
+            ///end of flat bat
+
+            //rounded corners bat
             ctx.beginPath();
+            ctx.moveTo(this.x + batCornerRadius, this.y);
+            ctx.lineTo(this.x + batWidth - batCornerRadius, this.y);
+            ctx.arc(this.x + batWidth - batCornerRadius, this.y + batCornerRadius, batCornerRadius, 3 * Math.PI / 2, 0);
+            ctx.lineTo(this.x + batWidth, this.y + batHeight - batCornerRadius);
+            ctx.arc(this.x + batWidth - batCornerRadius, this.y + batHeight - batCornerRadius, batCornerRadius, 0, Math.PI / 2);
+            ctx.lineTo(this.x + batCornerRadius, this.y + batHeight );
+            ctx.arc(this.x + batCornerRadius, this.y + batHeight - batCornerRadius, batCornerRadius, Math.PI / 2, Math.PI);
+            ctx.lineTo(this.x, this.y + batCornerRadius);
+            ctx.arc(this.x + batCornerRadius, this.y + batCornerRadius, batCornerRadius, Math.PI, 3 * Math.PI / 2);
             ctx.fillStyle = 'white';
-            ctx.strokeStyle = 'black';
-            ctx.fillRect(this.x, this.y, batWidth, batHeight);
-            ctx.strokeRect(this.x, this.y, batWidth, batHeight);
+            ctx.fill();
+            ctx.stroke();
+            ///
         }
+
 
         this.moveUp = function () {
             this.y -= 4;
@@ -117,23 +139,23 @@
 
         //if (isGameRunning) {
         //    //restartButton.value = "Pause game";
-            
+
         //}
         ////else {
         ////    startButton.value = "Start game";
 
         ////}
     }
-    
+
     //function initializeField() {
-        var leftBat = new drawBat(0, 100);
-        leftBat.draw(ctx);
+    var leftBat = new drawBat(0, 100);
+    leftBat.draw(ctx);
 
-        var rightBat = new drawBat(600 - batWidth, 100);
-        rightBat.draw(ctx);
+    var rightBat = new drawBat(600 - batWidth, 100);
+    rightBat.draw(ctx);
 
-        var ball = new drawBall(300, 50, 10);
-        ball.draw(ctx);
+    var ball = new drawBall(300, 50, 10);
+    ball.draw(ctx);
     //}
 
     //initializeField();
