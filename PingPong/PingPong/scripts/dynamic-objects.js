@@ -27,7 +27,7 @@
             leftBat.moveUp();
         }
 
-        if (e.keyCode === 65 && leftBat.y <= ctx.canvas.height - batHeight) {
+        if (e.keyCode === 65 && leftBat.y <= ctx.canvas.height - batHeight-whiteLineWidth) {
             leftBat.moveDown();
         }
 
@@ -35,7 +35,7 @@
             rightBat.moveUp();
         }
 
-        if (e.keyCode === 76 && rightBat.y <= ctx.canvas.height - batHeight) {
+        if (e.keyCode === 76 && rightBat.y <= ctx.canvas.height - batHeight - whiteLineWidth) {
             rightBat.moveDown();
         }
     }
@@ -71,7 +71,7 @@
                 direction.y = "down";
             }
 
-            if (this.y + ballRadius > ctx.canvas.height) {
+            if (this.y + ballRadius > ctx.canvas.height-whiteLineWidth+2) {
                 direction.y = "up";
             }
         }

@@ -9,7 +9,7 @@ nav {
     /*background-color: lightblue;*/
     /*float: right;*/
     height: 110px;
-    width: 100%;
+    width: 600px;
 }
 
 nav input {
@@ -49,12 +49,12 @@ nav input {
 #game-container {
     position: relative;
     overflow: hidden;
-    height: 100%;
+    height: 400px;
 }
 
 .draw-container {
     position: absolute;
-    width: 100%;
+    width: 600px;
     height: auto;
 }
 
