@@ -2,12 +2,12 @@
     var canvas = document.getElementById('dynamic-canvas');
     var ctx = canvas.getContext('2d');
     document.body.addEventListener("keydown", doKeyDown, true);
-
+    var whiteLineWidth = 9;
     var batHeight = 100,
-        batWidth = 15,
-        batCornerRadius =7,
+        batWidth = 14,
+        batCornerRadius = 7,
         ballRadius = 8,
-        ballSpeed = 1,
+        ballSpeed = 2,
         isGameRunning = false;
 
     var direction = {
@@ -21,8 +21,9 @@
         "up": -1,
         "down": +1
     }
+
     function doKeyDown(e) {
-        if (e.keyCode === 81 && leftBat.y >= 0) {
+        if (e.keyCode === 81 && leftBat.y >= whiteLineWidth) {
             leftBat.moveUp();
         }
 
@@ -30,7 +31,7 @@
             leftBat.moveDown();
         }
 
-        if (e.keyCode === 80 && rightBat.y >= 0) {
+        if (e.keyCode === 80 && rightBat.y >= whiteLineWidth) {
             rightBat.moveUp();
         }
 
@@ -58,15 +59,15 @@
         }
 
         this.bounce = function () {
-            if ((this.y > leftBat.y && this.y < leftBat.y + batHeight) && this.x - ballRadius === batWidth) {
+            if ((this.y + ballRadius >= leftBat.y && this.y - ballRadius <= leftBat.y + batHeight) && ((this.x - ballRadius <= batWidth) && (this.x - ballRadius > 0))) {
                 direction.x = "right";
             }
 
-            if ((this.y > rightBat.y && this.y < rightBat.y + batHeight) && this.x + ballRadius === ctx.canvas.width - batWidth) {
+            if ((this.y + ballRadius >= rightBat.y && this.y - ballRadius <= rightBat.y + batHeight) && ((this.x + ballRadius >= ctx.canvas.width - batWidth) && this.x + ballRadius < ctx.canvas.width)) {
                 direction.x = "left";
             }
 
-            if (this.y - ballRadius < 0) {
+            if (this.y - ballRadius < whiteLineWidth - 2) {
                 direction.y = "down";
             }
 
@@ -97,7 +98,7 @@
             ctx.arc(this.x + batWidth - batCornerRadius, this.y + batCornerRadius, batCornerRadius, 3 * Math.PI / 2, 0);
             ctx.lineTo(this.x + batWidth, this.y + batHeight - batCornerRadius);
             ctx.arc(this.x + batWidth - batCornerRadius, this.y + batHeight - batCornerRadius, batCornerRadius, 0, Math.PI / 2);
-            ctx.lineTo(this.x + batCornerRadius, this.y + batHeight );
+            ctx.lineTo(this.x + batCornerRadius, this.y + batHeight);
             ctx.arc(this.x + batCornerRadius, this.y + batHeight - batCornerRadius, batCornerRadius, Math.PI / 2, Math.PI);
             ctx.lineTo(this.x, this.y + batCornerRadius);
             ctx.arc(this.x + batCornerRadius, this.y + batCornerRadius, batCornerRadius, Math.PI, 3 * Math.PI / 2);
