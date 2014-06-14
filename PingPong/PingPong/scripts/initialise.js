@@ -1,4 +1,6 @@
 ﻿window.onload = function () {
-    drawBackground();
+    var background = new Background();
+
+    background.draw();
     drawStaticObjects();
 }
