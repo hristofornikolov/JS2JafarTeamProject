@@ -1,28 +1,25 @@
-﻿function drawStaticObjects() {
-    
-    var theCanvas = document.getElementById("static-canvas");
-    var ctx = theCanvas.getContext("2d");
+﻿function Field() {
+    var theCanvas = document.getElementById("static-canvas"),
+        ctx = theCanvas.getContext("2d");
 
-    ctx.beginPath();
-    ctx.strokeStyle = "#fff";
-    ctx.fillStyle = "#fff";
+    this.draw = function (leftPlayerScore, rightPlayerScore) {
+        ctx.clearRect(0, 0, theCanvas.width, theCanvas.height);
 
-    ctx.fillRect(0, 0, 600, 5);
-    ctx.fillRect(0, 395, 600, 5);
+        ctx.strokeStyle = "#FFF";
+        ctx.fillStyle = "#FFF";
 
-    ctx.beginPath();
-    ctx.lineWidth = 5;
-    ctx.setLineDash([10, 10]);
-    ctx.moveTo(300, 5);
-    ctx.lineTo(300, 400);
-    ctx.stroke();
-    
-    var leftPlayerScore = '0';
-    var rightPlayerScore = '0';
+        ctx.beginPath();
+        ctx.fillRect(0, 0, 600, 5);
+        ctx.fillRect(0, 395, 600, 5);
 
-    ctx.font = "60px Consolas";
+        ctx.lineWidth = 5;
+        ctx.setLineDash([10, 10]);
+        ctx.moveTo(300, 5);
+        ctx.lineTo(300, 400);
+        ctx.stroke();
 
-    ctx.fillText(leftPlayerScore, 248,50);
-    ctx.fillText(rightPlayerScore, 320, 50);
-
+        ctx.font = "60px Consolas";
+        ctx.fillText(leftPlayerScore, 248, 50);
+        ctx.fillText(rightPlayerScore, 320, 50);
+    }
 }
