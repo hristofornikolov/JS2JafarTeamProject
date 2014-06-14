@@ -6,32 +6,32 @@
     <link href="styles/ping-pong.css" rel="stylesheet" />
 </head>
 <body>
-    <nav>
-        <div class="center">
-            <input type="button" id="start-game" value="Start game" />
-            <input type="button" id="restart-game" value="Restart game" />
-            <input type="button" id="end-game" value="End game" />
-        </div>
-
-        <div>
-            <div id="left-player">
-                <p>&quot;Q&quot; : move up</p>
-                <p>&quot;A&quot; : move down</p>
+    <div id="game">
+        <div id="controls">
+            <div id="buttons">
+                <input type="button" id="start-game" value="Start game" />
+                <input type="button" id="restart-game" value="Restart game" />
+                <input type="button" id="end-game" value="End game" />
             </div>
 
-            <div id="right-player">
-                <p>move up : &quot;P&quot;</p>
-                <p>move down : &quot;L&quot;</p>
+            <div id="help">
+                <div id="left-player">
+                    <p>&quot;Q&quot; : move up</p>
+                    <p>&quot;A&quot; : move down</p>
+                </div>
+
+                <div id="right-player">
+                    <p>move up : &quot;P&quot;</p>
+                    <p>move down : &quot;L&quot;</p>
+                </div>
             </div>
         </div>
-    </nav>
     
-    <div id="game-container">
-        <canvas id="dynamic-canvas" class="draw-container" width="600" height="400">Your browser doesn't support canvas!</canvas>
-        <canvas id="static-canvas" class="draw-container" width="600" height="400">Your browser doesn't support canvas!</canvas>
-        <svg id="background-svg" class="draw-container" xmlns="http://www.w3.org/2000/svg">
-            Your browser doesn't support SVG!
-        </svg>
+        <div id="play-field">
+            <canvas id="dynamic-canvas" class="draw-container" width="600" height="400">Your browser doesn't support canvas!</canvas>
+            <canvas id="static-canvas" class="draw-container" width="600" height="400">Your browser doesn't support canvas!</canvas>
+            <svg id="background-svg" class="draw-container" width="600" height="400" xmlns="http://www.w3.org/2000/svg"></svg>
+        </div>
     </div>
 
     <script src="scripts/initialise.js"></script>

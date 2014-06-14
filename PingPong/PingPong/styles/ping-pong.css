@@ -1,73 +1,78 @@
 ﻿body, html {
-  height: 100%;
-  min-height: 400px;
-  min-width: 600px;
-  background-color: lightblue;
+    height: 100%;
+    background-color: lightblue;
 }
 
-nav {
-    /*background-color: lightblue;*/
-    /*float: right;*/
-    height: 110px;
-    width: 600px;
-}
-
-nav input {
-    margin: 14px 25px 6px 25px;
-    
-    width: 225px;
-    height: 50px;
-    text-align: center;
-    color: white;
-    font-family: Consolas;
-    font-size: 24px;
-    font-weight: bold;
-    border: 5px solid white;
-    border-radius: 10px;
-    background-color: dimgray;
-}
-
-.center {
-    text-align: center;
-}
-
-#left-player {
-    float: left;
-    font-size: 18px;
-    font-weight: bold;
-    font-family: Consolas;
-}
-
-#right-player {
-    float: right;
-    font-size: 18px;
-    font-weight: bold;
-    font-family: Consolas;
-    text-align: right;
-}
-
-#game-container {
-    position: relative;
-    overflow: hidden;
-    height: 400px;
-}
-
-.draw-container {
+#game {
     position: absolute;
     width: 600px;
-    height: auto;
+    height: 510px;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
 }
 
-#dynamic-canvas {
-    z-index: 2; /*Topmost layer*/
-    /*margin: 12px 0;*/
-}
+    #controls {
+        min-height: 110px;
+    }
 
-#static-canvas {
-    z-index: 1; /*Middle layer*/
-}
+        #buttons {
+            text-align: center;
+        }
 
-#background-svg {
-    background-color: dimgray;
-    z-index: 0; /*bottom layer layer*/
-}
+            #buttons input {
+                margin: 14px 20px 11px;
+    
+                width: 150px;
+                height: 50px;
+                text-align: center;
+                color: white;
+                font-family: Consolas;
+                font-size: 18px;
+                font-weight: bold;
+                border: 5px solid white;
+                border-radius: 10px;
+                background-color: dimgray;
+            }
+
+        #help {
+            font-size: 14px;
+            font-weight: bold;
+            font-family: Consolas;
+        }
+
+            #left-player {
+                float: left;
+            }
+
+            #right-player {
+                float: right;
+                text-align: right;
+            }
+
+    #play-field {
+        position: absolute;
+        top: 110px;
+        left: 0;
+
+        background-color: rgba(0, 0, 255, 0.3);
+    }
+
+        .draw-container {
+            position: absolute;
+        }
+
+            #dynamic-canvas {
+                z-index: 3; /*Topmost layer*/
+            }
+
+            #static-canvas {
+                z-index: 2; /*Middle layer*/
+            }
+
+            #background-svg {
+                background-color: dimgray;
+                z-index: 1; /*bottom layer layer*/
+            }
