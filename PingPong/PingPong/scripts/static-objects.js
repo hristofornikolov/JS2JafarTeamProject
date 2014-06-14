@@ -1,4 +1,4 @@
-﻿window.onload = function() {
+﻿function drawStaticObjects() {
     
     var theCanvas = document.getElementById("static-canvas");
     var ctx = theCanvas.getContext("2d");

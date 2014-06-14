@@ -58,11 +58,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\dynamic-objects.js" />
-    <Content Include="styles\html5reset-1.6.1.css" />
     <Content Include="scripts\initialise.js" />
+    <Content Include="styles\html5reset-1.6.1.css" />
+    <Content Include="scripts\background.js" />
     <Content Include="styles\ping-pong.css" />
     <Content Include="ping-pong.html" />
     <Content Include="scripts\static-objects.js" />
+    <Content Include="textures\grass.png" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

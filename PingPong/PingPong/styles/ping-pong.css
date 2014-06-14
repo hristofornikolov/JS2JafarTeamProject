@@ -6,7 +6,7 @@
 #game {
     position: absolute;
     width: 600px;
-    height: 510px;
+    height: 530px;
     margin: auto;
     top: 0;
     left: 0;
@@ -56,8 +56,6 @@
         position: absolute;
         top: 110px;
         left: 0;
-
-        background-color: rgba(0, 0, 255, 0.3);
     }
 
         .draw-container {
@@ -65,14 +63,16 @@
         }
 
             #dynamic-canvas {
+                top: 10px;
                 z-index: 3; /*Topmost layer*/
             }
 
             #static-canvas {
+                top: 10px;
                 z-index: 2; /*Middle layer*/
             }
 
             #background-svg {
-                background-color: dimgray;
-                z-index: 1; /*bottom layer layer*/
+                background-color: green;
+                z-index: 1; /*bottom layer*/
             }
