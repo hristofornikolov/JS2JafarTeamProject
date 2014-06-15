@@ -1,7 +1,7 @@
 ﻿window.onload = function () {
     var background = new Background(),
-        field = new Field();
+        field = new Field(),
+        game = new Game(field.draw);
 
     background.draw();
-    field.draw(0, 0);
 }

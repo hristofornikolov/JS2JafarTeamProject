@@ -1,4 +1,4 @@
-﻿(function () {
+﻿function Game(scoreDisplay) {
     var startButton = document.getElementById('start-game'),
         restartButton = document.getElementById('restart-game'),
         endButton = document.getElementById('end-game'),
@@ -7,6 +7,7 @@
 
     var isGameRunning = false,
         isGameEnded = false,
+        score = {left: 0, right: 0},
         leftBat,
         rightBat,
         ball,
@@ -14,9 +15,10 @@
 
     document.body.addEventListener("keydown", keyDownListener, true);
     startButton.onclick = startGame;
-    restartButton.onclick = initializeField;
+    restartButton.onclick = restartGame;
     endButton.onclick = endGame;
 
+    updateScore(0, 0);
     initializeField();
 
     function initializeField() {
@@ -24,6 +26,12 @@
         rightBat = new Bat(600 - 14, 100);
         ball = new Ball(300, 50);
         draw();
+    }
+
+    function updateScore(scoreLeft, scoreRight) {
+        score.left = scoreLeft;
+        score.right = scoreRight;
+        scoreDisplay(score.left, score.right);
     }
 
     function draw() {
@@ -38,6 +46,18 @@
         ball.bounce();
         draw();
 
+        switch (ball.placement(ctx)) {
+            case "outsideRight":
+                updateScore(score.left + 1, score.right);
+                initializeField();
+                break;
+            case "outsideLeft":
+                updateScore(score.left, score.right + 1);
+                initializeField();
+                break;
+            default:
+        }
+
         if (isGameRunning) {
             requestAnimationFrame(animation);
         }
@@ -47,6 +67,7 @@
         if (isGameEnded) {
             isGameEnded = false;
             isGameRunning = false;
+            updateScore(0, 0);
             initializeField();
         }
 
@@ -59,6 +80,11 @@
         else {
             startButton.value = "Start game";
         }
+    }
+
+    function restartGame() {
+        updateScore(0, 0);
+        initializeField();
     }
 
     function endGame() {
@@ -121,12 +147,7 @@
     function Ball(x, y) {
         var ballRadius = 8,
             ballSpeed = 2,
-
-            direction = {
-                x: 'right',
-                y: 'down'
-            },
-
+            direction = getRandomDirection(),
             directions = {
                 "left": -1,
                 "right": 1,
@@ -144,6 +165,16 @@
             ctx.arc(this.x, this.y, ballRadius, 0, 2 * Math.PI);
             ctx.fill();
             ctx.stroke();
+        }
+
+        this.placement = function (ctx) {
+            if (this.x > ctx.canvas.width + ballRadius) {
+                return "outsideRight";
+            }
+            if (this.x < 0 - ballRadius) {
+                return "outsideLeft";
+            }
+            return "inside"
         }
 
         this.move = function () {
@@ -168,5 +199,21 @@
                 direction.y = "up";
             }
         }
+
+        function getRandomDirection() {
+            var direction = {
+                x: 'right',
+                y: 'down'
+            };
+
+            if (Math.random() < 0.5) {
+                direction.x = "left";
+            }
+            if (Math.random() < 0.5) {
+                direction.y = "up";
+            }
+
+            return direction;
+        }
     }
-}());
+}
