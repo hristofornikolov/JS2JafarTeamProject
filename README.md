@@ -5,29 +5,29 @@ JS2 Jafar Team Project
 
 First Meeting 20140607-1400
 
-Задачи за първоначално изпълнение:
+Initial Tasks:
 
-1) Фон - SVG - задача за Константин със срок до неделя, 08/07/2014, 13:00
+1) Background - SVG - a task for Konstarntin, deadline - Sunday, 08/07/2014, 13:00
 
-2) Статчни обектии - Канвас
+2) Static Objects - Canvas
 
-2.1 Хелп меню
-2.1 Резултат
-2.3 Инструкции
-2.4 Разделителна линия
-2.5 Допълнителни бутони:
-2.5.1 Старт-пауза
-2.5.2 Рестарт
-2.5.3 Прекратяване
-2.5.4 Помощ
+2.1 Help Menu
+2.1 Score
+2.3 Instructions
+2.4 Separating Line
+2.5 Addiional Buttons:
+2.5.1 Start-Pause
+2.5.2 Restart
+2.5.3 End
+2.5.4 Help
 
-3) Динамични обекти - Канвас
+3) Dynamic Objects - Canvas
 
-3.1 Топка
-3.2 Хилки - със закръглени ръбове - готово, Пламен
+3.1 Ball
+3.2 Bats - with rounded edges - ready, Plamen
 
-4) Структуриране на проекта - задача за Георги със срок до неделя, 08/07/2014, 13:00
+4) Structuring of the project - a task for Georgi, deadline - Sunday, 08/07/2014, 13:00
 
 
-Всеки обект трябва да се изготви като функция, която приема параметри за изчертаването на обекта.
-След това ще ги свържем с логиката за преместване.
+Each object must be prepared as a function, which accepts parameters for the drawing of the object.
+Afterwards we will connect them to the movement logic.
