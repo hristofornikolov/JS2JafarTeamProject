@@ -1,33 +1,78 @@
 ﻿(function () {
-    var canvas = document.getElementById('dynamic-canvas');
-    var ctx = canvas.getContext('2d');
-    document.body.addEventListener("keydown", doKeyDown, true);
-    var whiteLineWidth = 9;
-    var batHeight = 100,
-        batWidth = 14,
-        batCornerRadius = 7,
-        ballRadius = 8,
-        ballSpeed = 2,
+    var startButton = document.getElementById('start-game'),
+        restartButton = document.getElementById('restart-game'),
+        endButton = document.getElementById('end-game'),
+        canvas = document.getElementById('dynamic-canvas'),
+        ctx = canvas.getContext('2d');
+
+    var isGameRunning = false,
+        isGameEnded = false,
+        leftBat,
+        rightBat,
+        ball,
+        whiteLineWidth = 9;
+
+    document.body.addEventListener("keydown", keyDownListener, true);
+    startButton.onclick = startGame;
+    restartButton.onclick = initializeField;
+    endButton.onclick = endGame;
+
+    initializeField();
+
+    function initializeField() {
+        leftBat = new Bat(0, 100);
+        rightBat = new Bat(600 - 14, 100);
+        ball = new Ball(300, 50);
+        draw();
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+        leftBat.draw(ctx);
+        rightBat.draw(ctx);
+        ball.draw(ctx);
+    }
+
+    function animation() {
+        ball.move();
+        ball.bounce();
+        draw();
+
+        if (isGameRunning) {
+            requestAnimationFrame(animation);
+        }
+    }
+
+    function startGame() {
+        if (isGameEnded) {
+            isGameEnded = false;
+            isGameRunning = false;
+            initializeField();
+        }
+
+        isGameRunning = !isGameRunning;
+
+        if (isGameRunning) {
+            startButton.value = "Pause game";
+            animation();
+        }
+        else {
+            startButton.value = "Start game";
+        }
+    }
+
+    function endGame() {
+        isGameEnded = true;
         isGameRunning = false;
-
-    var direction = {
-        x: 'right',
-        y: 'down'
-
-    }
-    var directions = {
-        "left": -1,
-        "right": 1,
-        "up": -1,
-        "down": +1
+        startButton.value = "Start game";
     }
 
-    function doKeyDown(e) {
+    function keyDownListener(e) {
         if (e.keyCode === 81 && leftBat.y >= whiteLineWidth) {
             leftBat.moveUp();
         }
 
-        if (e.keyCode === 65 && leftBat.y <= ctx.canvas.height - batHeight-whiteLineWidth) {
+        if (e.keyCode === 65 && leftBat.y <= ctx.canvas.height - leftBat.height - whiteLineWidth) {
             leftBat.moveDown();
         }
 
@@ -35,12 +80,60 @@
             rightBat.moveUp();
         }
 
-        if (e.keyCode === 76 && rightBat.y <= ctx.canvas.height - batHeight - whiteLineWidth) {
+        if (e.keyCode === 76 && rightBat.y <= ctx.canvas.height - rightBat.height - whiteLineWidth) {
             rightBat.moveDown();
         }
     }
 
-    function drawBall(x, y) {
+    function Bat(x, y) {
+        var cornerRadius = 7;
+
+        this.x = x;
+        this.y = y;
+        this.height = 100;
+        this.width = 14;
+
+        this.draw = function (ctx) {
+            ctx.beginPath();
+            ctx.moveTo(this.x + cornerRadius, this.y);
+            ctx.lineTo(this.x + this.width - cornerRadius, this.y);
+            ctx.arc(this.x + this.width - cornerRadius, this.y + cornerRadius, cornerRadius, 3 * Math.PI / 2, 0);
+            ctx.lineTo(this.x + this.width, this.y + this.height - cornerRadius);
+            ctx.arc(this.x + this.width - cornerRadius, this.y + this.height - cornerRadius, cornerRadius, 0, Math.PI / 2);
+            ctx.lineTo(this.x + cornerRadius, this.y + this.height);
+            ctx.arc(this.x + cornerRadius, this.y + this.height - cornerRadius, cornerRadius, Math.PI / 2, Math.PI);
+            ctx.lineTo(this.x, this.y + cornerRadius);
+            ctx.arc(this.x + cornerRadius, this.y + cornerRadius, cornerRadius, Math.PI, 3 * Math.PI / 2);
+            ctx.fillStyle = 'white';
+            ctx.fill();
+            ctx.stroke();
+        }
+
+        this.moveUp = function () {
+            this.y -= 4;
+        }
+
+        this.moveDown = function () {
+            this.y += 4;
+        }
+    }
+
+    function Ball(x, y) {
+        var ballRadius = 8,
+            ballSpeed = 2,
+
+            direction = {
+                x: 'right',
+                y: 'down'
+            },
+
+            directions = {
+                "left": -1,
+                "right": 1,
+                "up": -1,
+                "down": 1
+            };
+
         this.x = x;
         this.y = y;
 
@@ -59,11 +152,11 @@
         }
 
         this.bounce = function () {
-            if ((this.y + ballRadius >= leftBat.y && this.y - ballRadius <= leftBat.y + batHeight) && ((this.x - ballRadius <= batWidth) && (this.x - ballRadius > 0))) {
+            if ((this.y + ballRadius >= leftBat.y && this.y - ballRadius <= leftBat.y + leftBat.height) && ((this.x - ballRadius <= leftBat.width) && (this.x - ballRadius > 0))) {
                 direction.x = "right";
             }
 
-            if ((this.y + ballRadius >= rightBat.y && this.y - ballRadius <= rightBat.y + batHeight) && ((this.x + ballRadius >= ctx.canvas.width - batWidth) && this.x + ballRadius < ctx.canvas.width)) {
+            if ((this.y + ballRadius >= rightBat.y && this.y - ballRadius <= rightBat.y + rightBat.height) && ((this.x + ballRadius >= ctx.canvas.width - rightBat.width) && this.x + ballRadius < ctx.canvas.width)) {
                 direction.x = "left";
             }
 
@@ -71,107 +164,9 @@
                 direction.y = "down";
             }
 
-            if (this.y + ballRadius > ctx.canvas.height-whiteLineWidth+2) {
+            if (this.y + ballRadius > ctx.canvas.height - whiteLineWidth + 2) {
                 direction.y = "up";
             }
         }
     }
-
-    function drawBat(x, y) {
-        this.x = x;
-        this.y = y;
-
-        this.draw = function (ctx) {
-
-            //ctx.beginPath();
-            //ctx.fillStyle = 'white';
-            //ctx.strokeStyle = 'black';
-            //ctx.fillRect(this.x, this.y, batWidth, batHeight);
-            //ctx.strokeRect(this.x, this.y, batWidth, batHeight);
-
-            ///end of flat bat
-
-            //rounded corners bat
-            ctx.beginPath();
-            ctx.moveTo(this.x + batCornerRadius, this.y);
-            ctx.lineTo(this.x + batWidth - batCornerRadius, this.y);
-            ctx.arc(this.x + batWidth - batCornerRadius, this.y + batCornerRadius, batCornerRadius, 3 * Math.PI / 2, 0);
-            ctx.lineTo(this.x + batWidth, this.y + batHeight - batCornerRadius);
-            ctx.arc(this.x + batWidth - batCornerRadius, this.y + batHeight - batCornerRadius, batCornerRadius, 0, Math.PI / 2);
-            ctx.lineTo(this.x + batCornerRadius, this.y + batHeight);
-            ctx.arc(this.x + batCornerRadius, this.y + batHeight - batCornerRadius, batCornerRadius, Math.PI / 2, Math.PI);
-            ctx.lineTo(this.x, this.y + batCornerRadius);
-            ctx.arc(this.x + batCornerRadius, this.y + batCornerRadius, batCornerRadius, Math.PI, 3 * Math.PI / 2);
-            ctx.fillStyle = 'white';
-            ctx.fill();
-            ctx.stroke();
-            ///
-        }
-
-
-        this.moveUp = function () {
-            this.y -= 4;
-        }
-
-        this.moveDown = function () {
-            this.y += 4;
-        }
-    }
-
-    var startButton = document.getElementById('start-game');
-    startButton.onclick = function startGame() {
-        isGameRunning = !isGameRunning;
-
-        if (isGameRunning) {
-            startButton.value = "Pause game";
-            animation();
-        }
-        else {
-            startButton.value = "Start game";
-
-        }
-    }
-
-    var restartButton = document.getElementById('restart-game');
-    restartButton.onclick = function startGame() {
-        //isGameRunning = true;
-        initializeField();
-        animation();
-
-        //if (isGameRunning) {
-        //    //restartButton.value = "Pause game";
-
-        //}
-        ////else {
-        ////    startButton.value = "Start game";
-
-        ////}
-    }
-
-    //function initializeField() {
-    var leftBat = new drawBat(0, 100);
-    leftBat.draw(ctx);
-
-    var rightBat = new drawBat(600 - batWidth, 100);
-    rightBat.draw(ctx);
-
-    var ball = new drawBall(300, 50, 10);
-    ball.draw(ctx);
-    //}
-
-    //initializeField();
-
-    function animation() {
-        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-        leftBat.draw(ctx);
-        rightBat.draw(ctx);
-        ball.draw(ctx);
-        ball.move();
-        ball.bounce();
-
-        if (isGameRunning) {
-            requestAnimationFrame(animation);
-        }
-    }
-
 }());
